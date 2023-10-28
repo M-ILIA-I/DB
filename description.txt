@@ -1,0 +1,76 @@
+1. User:
+	-first_name: text
+	-last_name: text
+	-email: text
+2. Worker:
+	-user: fk (User)
+	-phone_number: text
+	-position: text
+	-description: text
+3. SaladType:
+	-name: text
+	-price: text
+4. PlatterType:
+	-name: text
+	-small_price: number
+	-large_price: number
+5. Salad:
+	-alredy_ordered: bool
+	-add_by: fk (User)
+	-price: number
+	-salad_type: fk (SaladType)
+	-in_order: fk (ProperOrder)
+6. Platter:
+	-in_order: fk (ProperOrder)
+	-alredy_ordered: bool
+	-add_by: fk (User)
+	-price: number
+	-platter_type: fk (PlatterType)
+	-platter_size: text
+7. Pizza:
+	-in_order: fk (ProperOrder)
+	-alredy_ordered: bool
+	-add_by: fk (User)
+	-price: number
+	-pizza_type: fk (PlatterType)
+	-pizza_size: text
+	-toppings: text
+8. ProperOrder:
+	-order_client: fk(user)
+	-order_timestamp: datetime
+	-order_price: number
+	-order_done: bool
+9. Sub:
+	-in_order: fk (ProperOrder)
+	-alredy_ordered: bool
+	-add_by: fk (User)
+	-price: number
+	-sub_type: fk (PlatterType)
+	-sub_size: text
+	-toppings: text
+10. Pasta:
+	-alredy_ordered: bool
+	-add_by: fk (User)
+	-price: number
+	-pasta_type: fk (PastaType)
+11. PizzaType:
+	-name: text
+	-price_sm_0: text
+	-price_sm_1: text
+	-price_sm_2: text
+	-price_sm_3: text
+	-price_sm_4: text
+	-price_lg_0: text
+	-price_lg_1: text
+	-price_lg_2: text
+	-price_lg_3: text
+	-price_lg_4: text
+12. PizzaToping:
+	-name: text
+13. SubType:
+	-name: text
+	-small_price: number
+	-large_price: number
+14. PastaType:
+	-name:text
+	-price: numver

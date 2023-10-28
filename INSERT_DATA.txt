@@ -1,0 +1,64 @@
+--fill pizzatypes
+
+INSERT INTO orders_pizzatype (name, price_sm_0, price_sm_1,price_sm_2,price_sm_3,price_sm_4, price_lg_0, price_lg_1,price_lg_2,price_lg_3,price_lg_4) VALUES
+('Regular', 1, 2, 3, 4, 5,6,7,8,10,11),
+('Sicilian', 11, 22, 33, 44, 55,66,77,88,10,11)
+
+--fill orders_user
+
+INSERT INTO orders_user (first_name, phone_number, password, last_name, email, is_superuser)
+VALUES ('ilya', '+375333599709', '12345', 'Mirolyubov', 'ilyamir1@mail.ur', '0'),
+('ilya_admin', '+375333599709', '12345', 'Mirolyubov', 'ilyamir1@mail.ur', '1')
+
+--fill pastatype_id
+
+INSERT INTO orders_pastatype (name, price)
+VALUES ('regular', 200), ('france', 300)
+
+-- fill pizzatoping
+
+INSERT INTO orders_pizzatopping (name)
+VALUES ('Cheese'), ('peperoni'), ('tomato'), ('paper')
+
+
+-- fill pizza_topings
+
+INSERT INTO orders_pizza_toppings (pizza_id, pizzatopping_id)
+VALUES (1,1), (1,2), (1,3), (2,1), (2,2), (2,3)
+
+--fill saladtype
+
+INSERT INTO orders_saladtype(name, price)
+VALUES ('summer', 10),('Green salad',12), ('Beet salad',13);
+
+--fill staff
+
+INSERT INTO orders_staff (position, description, user_id)
+VALUES ('admin','cool boy', 2);
+
+--fill proper ORDER
+INSERT INTO orders_properorder(order_timestamp, order_price, order_client_id, order_done)
+VALUES (DATE(), 200, 1, 1);
+
+
+--fill pasta
+
+INSERT INTO orders_pasta(already_ordered, price, add_by_id, in_order_id, pastatype_id)
+VALUES(1,10,1,1,1)
+
+--fill pizza
+
+INSERT INTO orders_pizza(already_ordered, pizza_size, price, add_by_id, in_order_id, pizzatype_id)
+VALUES(1, 'sm', 30, 1, 1, 1);
+
+--fill pizzatoppings
+
+INSERT INTO orders_pizza_toppings(pizza_id, pizzatopping_id)
+VALUES (1,1), (1,2), (1,3);
+
+
+--fill pasta
+
+INSERT INTO orders_salad(already_ordered, price, add_by_id, in_order_id, saladtype_id)
+VALUES(1,10,1,1,1)
+

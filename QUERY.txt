@@ -1,0 +1,25 @@
+CREATE TABLE "orders_pastatype" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(60) NOT NULL UNIQUE, "price" decimal NOT NULL);
+
+CREATE TABLE "orders_pizzatopping" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(60) NOT NULL UNIQUE);
+
+CREATE TABLE "orders_pizzatype" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(60) NOT NULL UNIQUE, "price_sm_0" decimal NULL, "price_sm_1" decimal NULL, "price_sm_2" decimal NULL, "price_sm_3" decimal NULL, "price_sm_4" decimal NULL, "price_lg_0" decimal NULL, "price_lg_1" decimal NULL, "price_lg_2" decimal NULL, "price_lg_3" decimal NULL, "price_lg_4" decimal NULL);
+
+CREATE TABLE "orders_plattertype" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(60) NOT NULL UNIQUE, "small_price" decimal NOT NULL, "large_price" decimal NOT NULL);
+
+CREATE TABLE "orders_properorder" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "order_timestamp" datetime NOT NULL, "order_price" decimal NOT NULL, "order_done" bool NOT NULL, "order_client_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+
+CREATE TABLE "orders_saladtype" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(60) NOT NULL UNIQUE, "price" decimal NOT NULL);
+
+CREATE TABLE "orders_subtype" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(60) NOT NULL UNIQUE, "small_price" decimal NULL, "large_price" decimal NOT NULL, "only_big_size" bool NOT NULL);
+
+CREATE TABLE "orders_sub" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "already_ordered" bool NOT NULL, "additional_cheese" bool NOT NULL, "price" decimal NOT NULL, "subsize" varchar(60) NOT NULL, "add_by_id" integer NULL REFERENCES "auth_user" ("id"), "in_order_id" integer NULL REFERENCES "orders_properorder" ("id"), "subtype_id" integer NOT NULL REFERENCES "orders_subtype" ("id"));
+
+CREATE TABLE "orders_salad" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "already_ordered" bool NOT NULL, "price" decimal NOT NULL, "add_by_id" integer NULL REFERENCES "auth_user" ("id"), "in_order_id" integer NULL REFERENCES "orders_properorder" ("id"), "saladtype_id" integer NOT NULL REFERENCES "orders_saladtype" ("id"));
+
+CREATE TABLE "orders_platter" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "already_ordered" bool NOT NULL, "price" decimal NOT NULL, "plattersize" varchar(60) NOT NULL, "add_by_id" integer NULL REFERENCES "auth_user" ("id"), "in_order_id" integer NULL REFERENCES "orders_properorder" ("id"), "plattertype_id" integer NOT NULL REFERENCES "orders_plattertype" ("id"));
+
+CREATE TABLE "orders_pizza" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "already_ordered" bool NOT NULL, "pizza_size" varchar(2) NOT NULL, "price" decimal NOT NULL, "add_by_id" integer NULL REFERENCES "auth_user" ("id"), "in_order_id" integer NULL REFERENCES "orders_properorder" ("id"), "pizzatype_id" integer NULL REFERENCES "orders_pizzatype" ("id"));
+
+CREATE TABLE "orders_pizza_toppings" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "pizza_id" integer NOT NULL REFERENCES "orders_pizza" ("id"), "pizzatopping_id" integer NOT NULL REFERENCES "orders_pizzatopping" ("id"));
+
+CREATE TABLE "orders_pasta" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "already_ordered" bool NOT NULL, "price" decimal NOT NULL, "add_by_id" integer NULL REFERENCES "auth_user" ("id"), "in_order_id" integer NULL REFERENCES "orders_properorder" ("id"), "pastatype_id" integer NOT NULL REFERENCES "orders_pastatype" ("id"));
